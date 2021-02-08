@@ -1,4 +1,4 @@
 # Senior
-Entrar na pasta usar o comando npm install > ng serve
+Baixar as depedencias com o npm install, e executar o comando ng serve
 
 
