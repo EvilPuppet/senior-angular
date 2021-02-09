@@ -1,0 +1,54 @@
+{
+	"data": [
+		{
+			"id": "1000",			
+			"nome": "ABamboo Watch",		
+			"unidadeMedida": "Litro",
+			"quantidade": 65,
+			"preco": 100,
+			"perecivel": true,
+			"dataValidade": "2021-01-01",
+			"dataFabricacao": "2021-12-01"
+		},
+		{
+			"id": "1001",
+			"nome": "Blue Band",
+			"unidadeMedida": "Litro",
+			"quantidade": 65,
+			"preco": 100,
+			"perecivel": true,
+			"dataValidade": "2021-01-01",
+			"dataFabricacao": "2021-12-01"
+		},
+		{
+			"id": "1002",
+			"nome": "Blue T-Shirt",
+			"unidadeMedida": "Unidade",
+			"quantidade": 65,
+			"preco": 100,
+			"perecivel": true,
+			"dataValidade": "2021-01-01",
+			"dataFabricacao": "2021-12-01"
+		},
+		{
+			"id": "1003",
+            "nome": "Bracelet",
+			"unidadeMedida": "Unidade",
+			"quantidade": 65,
+			"preco": 100,
+			"perecivel": false,
+			"dataValidade": "2021-01-01",
+			"dataFabricacao": "2021-12-01"
+		},
+		{
+			"id": "1004",
+            "nome": "Brown Purse",
+			"unidadeMedida": "Unidade",
+			"quantidade": 65,
+			"preco": 100,
+			"perecivel": false,
+			"dataValidade": "2021-01-01",
+			"dataFabricacao": "2021-12-01"
+		}		
+	]
+}

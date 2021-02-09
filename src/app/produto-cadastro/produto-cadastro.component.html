@@ -1,0 +1,65 @@
+<p-toast></p-toast>
+
+<div class="p-fluid">
+    <h1>Cadastro de Produto</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="saveProduto()" class="form-horizontal" novalidate>
+        <div class="p-field p-grid">
+            <label for="Nome" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome</label>
+            <div class="p-col-12 p-md-10">
+                <input formControlName="nome" id="Nome" type="text" pInputText maxlength="50">
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Unidade de medida" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Unidade de medida</label>
+            <div class="p-col-12 p-md-10">
+                <div class="p-inputgroup">
+                    <p-dropdown formControlName="unidadeMedida" [options]="unidadeMedida"
+                        [(ngModel)]="produto.unidadeMedida" optionLabel="nome" placeholder="Selececione a unidade">
+                    </p-dropdown>
+                    <span class="p-inputgroup-addon">{{produto.unidadeMedida?.abreviacao}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Quantidade" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Quantidade</label>
+            <div class="p-col-12 p-md-10">
+                <p-inputNumber formControlName="quantidade"
+                    [useGrouping]="verificarEnumeracaoMode(unidadeMedidaSelecionada)"
+                    [minFractionDigits]="verificarEnumeracaoFracional(unidadeMedidaSelecionada)"></p-inputNumber>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Preço" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Preço</label>
+            <div class="p-col-12 p-md-10">
+                <div class="p-inputgroup">
+                    <p-inputNumber formControlName="preco" mode="currency" currency="BRL"></p-inputNumber>
+                    <span class="p-inputgroup-addon">BRL</span>
+                </div>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Produto perecível" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Produto perecível</label>
+            <div class="p-col-12 p-md-10">
+                <p-checkbox #produtoPerecivel formControlName="produtoPerecivel" [(ngModel)]="value" [binary]="true"></p-checkbox>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Data de validade" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data de validade</label>
+            <div class="p-col-12 p-md-10">
+                <p-calendar formControlName="dataValidade" #dataValidade [(ngModel)]="dataValidade.value"
+                    dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="Data de fabricação" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data de fabricação</label>
+            <div class="p-col-12 p-md-10">
+                <p-calendar formControlName="dataFabricacao" #dataFabricacao [(ngModel)]="dataFabricacao.value"
+                    dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+        </div>
+        <div class="p-grid">
+            <p-button class="p-col-2" [disabled]="!registerForm.valid" (click)="saveProduto()" label="Salvar"></p-button>
+            <p-button class="p-col-2" (click)="buttonCancelar()" label="fechar"></p-button>
+        </div>
+    </form>
+</div>

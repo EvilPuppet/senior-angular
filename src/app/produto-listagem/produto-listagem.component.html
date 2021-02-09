@@ -1,0 +1,101 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">           
+            <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProdutoSelecionado()"
+                [disabled]="!produtoSelecionado || !produtoSelecionado.length"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="produtos" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['nome','unidadeMedida','quantidade','preco','produtoPerecivel','dataValidade','dataFabricacao']"
+        [(selection)]="produtoSelecionado" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Produtos</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input style="width:100%" pInputText #busca type="text"
+                        (input)="dt.filterGlobal(busca.value, 'contains')" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon>
+                </th>
+                <th pSortableColumn="unidadeMedida">Unidade de medida <p-sortIcon field="unidadeMedida"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantidade">Quantidade <p-sortIcon field="quantidade"></p-sortIcon>
+                </th>
+                <th pSortableColumn="preco">Preço <p-sortIcon field="preco"></p-sortIcon>
+                </th>
+                <th pSortableColumn="produtoPerecivel">Produto perecível <p-sortIcon field="produtoPerecivel">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="dataValidade">Data de validade <p-sortIcon field="dataValidade"></p-sortIcon>
+                </th>
+                <th pSortableColumn="dataFabricacao">Data de fabricação <p-sortIcon field="dataFabricacao"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="produto"></p-tableCheckbox>
+                </td>
+                <td>{{produto.nome}}</td>
+                <td>{{produto.unidadeMedida}}</td>
+                <td>{{produto.quantidade}}</td>
+                <td>{{produto.preco | currency:'BRL'}}</td>
+                <td>{{produto.perecivel ? 'Sim' : 'Não'}}</td>
+                <td>{{produto.dataValidade | date: 'dd/MM/yyyy'}}</td>
+                <td>{{produto.dataFabricacao | date: 'dd/MM/yyyy'}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                        [routerLink]="['/produto-cadastro/', produto.id]" (click)="editProduto(produto)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteProduto(produto)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                No total, são {{produtos ? produtos.length : 0 }} produtos.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<!-- <p-dialog [(visible)]="produtoDialog" [style]="{width: '450px'}" header="produto Details" [modal]="true" styleClass="p-fluid"> -->
+<!-- <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="produto.nome" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !produto.nome">Name is required.</small>
+        </div>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [(ngModel)]="produto.preco" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+            <div class="p-field p-col">
+                <label for="quantity">Quantity</label>
+                <p-inputNumber id="quantity" [(ngModel)]="produto.quantidade"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template> -->
+
+<!-- <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduto()"></button>
+    </ng-template>
+</p-dialog> -->
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
